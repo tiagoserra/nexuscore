@@ -1,0 +1,14 @@
+using Application.%#MODULE#%.Commands;
+using Microsoft.Extensions.Localization;
+using FluentValidation;
+
+namespace Application.%#MODULE#%.CommandValidations;
+
+public class %##%RemoveCommandValidation : AbstractValidator<%##%RemoveCommand>
+{
+    public %##%RemoveCommandValidation(IStringLocalizer localizer)
+    {
+        RuleFor(p => p.Id)
+            .NotNull().WithMessage(string.Format(localizer["Common:Message:Required:Field"].Value, "Id"));
+    }
+}

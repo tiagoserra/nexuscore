@@ -1,3 +1,6 @@
+using Domain.Common.Entities;
+using Domain.Common.Exceptions;
+
 namespace Domain.%#MODULE#%.Entities;
 
 public class %##% : Entity

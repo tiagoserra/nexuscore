@@ -1,0 +1,17 @@
+using Application.Common.Attributes;
+using Application.Common.Commands;
+using Domain.%#MODULE#%.Permissions;
+using MediatR;
+
+namespace Application.%#MODULE#%.Commands;
+
+[AuthorizeAttribute(Role = %##%Permission.Role, Policy = %##%Permission.DELETE)]
+public class %##%RemoveCommand : IRequest<ResponseCommand>
+{
+    public long Id { get; }
+
+    public %##%RemoveCommand(long id)
+    {
+        Id = id;
+    }
+}

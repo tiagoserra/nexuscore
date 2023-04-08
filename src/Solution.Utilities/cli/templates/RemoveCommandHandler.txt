@@ -1,0 +1,33 @@
+using Application.Common.Attributes;
+using Application.Common.Commands;
+using Application.%#MODULE#%.Interfaces;
+using Domain.%#MODULE#%.Permissions;
+using MediatR;
+
+namespace Application.%#MODULE#%.CommandHandlers;
+
+public class %##%RemoveCommandHandler : IRequestHandler<%##%RemoveCommand, ResponseCommand>
+{
+    private readonly IStringLocalizer _localizer;
+    private readonly I%##%Repository _repository;
+
+    public %##%RemoveCommandHandler(IStringLocalizer localizer, I%##%Repository repository)
+    {
+        _localizer = localizer;
+        _repository = repository;
+    }
+
+    public async Task<ResponseCommand> Handle(%##%RemoveCommand request, CancellationToken cancellationToken)
+    {
+        %##% %#lower#% = await _repository.GetByIdAsync(request.Id);
+
+        if(%#lower#% is null)
+            return new ResponseCommand(ResponseStatusCommand.NotFound)
+
+        %#lower#%.Name = request.Name;
+
+        await _repository.DeleteAsync(%#lower#%);
+
+        return new ResponseCommand(ResponseStatusCommand.Ok);
+    }
+}

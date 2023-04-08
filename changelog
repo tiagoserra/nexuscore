@@ -1,3 +1,9 @@
+Sat Apr 08 12:04:00 UTC 2023
+Improvement
+    Alter Nexus ClI add handlers to layer Application
+Fix
+    Fix  Nexus ClI handler Domain when create files
++--------------------------+
 Sat Apr 08 10:32:00 UTC 2023
 Feature
     Add Domain Event in layer Domain

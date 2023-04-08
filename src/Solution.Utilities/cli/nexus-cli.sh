@@ -49,14 +49,13 @@ replaceInFile() {
     cp $template $pathFileDestination
     replace '%##%' $EntityName $pathFileDestination
     replace '%#MODULE#%' $ModuleName $pathFileDestination
-    replace '%#GROUP#%' $EntityName's' $pathFileDestination
     replace '%#table#%' $EntityName $pathFileDestination
     replace '%#lower#%' $(echo $EntityName | tr '[:upper:]' '[:lower:]') $pathFileDestination
     replace '%#schema#%' $ModuleName $pathFileDestination
     replace '%#module_lower#%' $(echo $ModuleName | tr '[:upper:]' '[:lower:]') $pathFileDestination
 }
 
-unitTestsHandler(){
+unitTestsHandler() {
 
     echo 'Add Unit Tests'
     pathUnitTestDestination='../../../tst/UnitTests/Domain/'$ModuleName
@@ -88,8 +87,54 @@ domainHandler() {
     replaceInFile $pathDomainDestination'/Entities/'$EntityName'.cs' 'templates/Entity.txt'
     replaceInFile $pathPermissions'/'$EntityName'Permission.cs' 'templates/Permission.txt'
 
-    if [ $WithUnitTest = 'yes' ]; then
-        unitTestsHandler
-    fi
+    applicationHandler
 
 }
+
+applicationHandler() {
+
+    echo 'Add in Application'
+    pathApplicationDestination='../../Application/'$ModuleName
+    pathApplicationCommands=$pathApplicationDestination'/Commands/'
+    pathApplicationCommandValidations=$pathApplicationDestination'/CommandValidations/'
+    pathApplicationCommandHandlers=$pathApplicationDestination'/CommandHandlers/'
+    pathApplicationCommandQueries=$pathApplicationDestination'/CommandQueries/'
+    pathApplicationInterfaces=$pathApplicationDestination'/Interfaces/'
+
+    if [ ! -f "$pathApplicationDestination" ]; then
+        mkdir -p $pathApplicationDestination
+        mkdir -p $pathApplicationCommands
+        mkdir -p $pathApplicationCommandValidations
+        mkdir -p $pathApplicationCommandQueries
+        mkdir -p $pathApplicationCommandHandlers
+        mkdir -p $pathApplicationDestination'/EventHandlers/'
+        mkdir -p $pathApplicationInterfaces
+    fi
+
+    replaceInFile $pathApplicationCommands'/'$EntityName'RegisterCommand.cs' 'templates/RegisterCommand.txt'
+    replaceInFile $pathApplicationCommands'/'$EntityName'AlterCommand.cs' 'templates/AlterCommand.txt'
+    replaceInFile $pathApplicationCommands'/'$EntityName'RemoveCommand.cs' 'templates/RemoveCommand.txt'
+
+    replaceInFile $pathApplicationCommandValidations'/'$EntityName'RegisterCommandValidation.cs' 'templates/RegisterCommandValidation.txt'
+    replaceInFile $pathApplicationCommandValidations'/'$EntityName'AlterCommandValidation.cs' 'templates/AlterCommandValidation.txt'
+    replaceInFile $pathApplicationCommandValidations'/'$EntityName'RemoveCommandValidation.cs' 'templates/RemoveCommandValidation.txt'
+
+    replaceInFile $pathApplicationCommandQueries'/'$EntityName'GetByIdCommandQuery.cs' 'templates/GetByIdCommandQuery.txt'
+    replaceInFile $pathApplicationCommandQueries'/'$EntityName'GetAllWithPaginationCommandQuery.cs' 'templates/GetAllWithPaginationCommandQuery.txt'
+
+    replaceInFile $pathApplicationCommandHandlers'/'$EntityName'RegisterCommandHandler.cs' 'templates/RegisterCommandHandler.txt'
+    replaceInFile $pathApplicationCommandHandlers'/'$EntityName'AlterCommandHandler.cs' 'templates/AlterCommandHandler.txt'
+    replaceInFile $pathApplicationCommandHandlers'/'$EntityName'RemoveCommandHandler.cs' 'templates/RemoveCommandHandler.txt'
+
+    replaceInFile $pathApplicationCommandHandlers'/'$EntityName'GetByIdCommandQueryHandler.cs' 'templates/GetByIdCommandQueryHandler.txt'
+    replaceInFile $pathApplicationCommandHandlers'/'$EntityName'GetAllWithPaginationCommandQueryHandler.cs' 'templates/GetAllWithPaginationCommandQueryHandler.txt'
+
+    replaceInFile $pathApplicationInterfaces'/I'$EntityName'Repository.cs' 'templates/IRepository.txt'
+
+}
+
+domainHandler
+
+if [ $WithUnitTest = 'yes' ]; then
+    unitTestsHandler
+fi

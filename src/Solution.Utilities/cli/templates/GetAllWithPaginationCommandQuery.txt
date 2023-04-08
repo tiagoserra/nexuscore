@@ -1,0 +1,13 @@
+using Application.Common.Attributes;
+using Application.Common.Commands;
+using Domain.%#MODULE#%.Permissions;
+using MediatR;
+
+namespace Application.%#MODULE#%.CommandQueries;
+
+[AuthorizeAttribute(Role = %##%Permission.Role, Policy = %##%Permission.READ)]
+public class %##%GetAllWithPaginationCommandQuery : IRequest<ResponseCommand>
+{
+    public int PageNumber { get; set; } = 1;
+    public int PageSize { get; set; } = 25;
+}

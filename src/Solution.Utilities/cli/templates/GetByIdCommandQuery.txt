@@ -1,0 +1,14 @@
+using Application.Common.Attributes;
+using Application.Common.Commands;
+using Domain.%#MODULE#%.Permissions;
+using MediatR;
+
+namespace Application.%#MODULE#%.CommandQueries;
+
+[AuthorizeAttribute(Role = %##%Permission.Role, Policy = %##%Permission.READ)]
+public class %##%GetByIdCommandQuery : IRequest<ResponseCommand>
+{
+    public long Id { get; }
+
+    public %##%GetByIdCommandQuery(long id) => Id = id;
+}

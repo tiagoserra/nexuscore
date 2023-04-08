@@ -1,0 +1,20 @@
+using Application.%#MODULE#%.Commands;
+using Microsoft.Extensions.Localization;
+using FluentValidation;
+
+namespace Application.%#MODULE#%.CommandValidations;
+
+public class %##%AlterCommandValidation : AbstractValidator<%##%AlterCommand>
+{
+    public %##%AlterCommandValidation(IStringLocalizer localizer)
+    {
+        RuleFor(p => p.Id)
+            .NotNull().WithMessage(string.Format(localizer["Common:Message:Required:Field"].Value, "Id"));
+            
+        /*
+        RuleFor(v => v.Name)
+            .MaximumLength(255).WithMessage(string.Format(localizer["Common:Message:Error:MinMaxLengthCustom"].Value, localizer["Common:Label:Name"].Value, "1", "255"))
+            .NotEmpty().WithMessage(string.Format(localizer["Common:Message:Required:Field"].Value, localizer["Common:Label:Name"].Value));
+        */
+    }
+}

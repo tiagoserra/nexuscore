@@ -1,0 +1,30 @@
+using Application.Common.Attributes;
+using Application.Common.Commands;
+using Application.Common.Enums;
+using Application.%#MODULE#%.Interfaces;
+using Domain.%#MODULE#%.Permissions;
+using MediatR;
+
+namespace Application.%#MODULE#%.CommandHandlers;
+
+public class %##%GetByIdCommandQueryHandler : IRequestHandler<%##%GetByIdCommandQuery, ResponseCommand>
+{
+    private readonly IStringLocalizer _localizer;
+    private readonly I%##%Repository _repository;
+
+    public %##%GetByIdCommandQueryHandler(IStringLocalizer localizer, I%##%Repository repository)
+    {
+        _localizer = localizer;
+        _repository = repository;
+    }
+
+    public async Task<Response> Handle(%##%GetByIdQuery request, CancellationToken cancellationToken)
+    {
+        %##% %#lower#% = await _repository.GetByIdAsync(request.Id);
+
+        if(%#lower#% is null)
+            return new ResponseCommand(ResponseStatusCommand.NotFound)
+
+        return new ResponseCommand(%#lower#%)
+    }
+}

@@ -1,0 +1,28 @@
+using Application.Common.Attributes;
+using Application.Common.Commands;
+using Application.%#MODULE#%.Interfaces;
+using Domain.%#MODULE#%.Permissions;
+using MediatR;
+
+namespace Application.%#MODULE#%.CommandHandlers;
+
+public class %##%RegisterCommandHandler : IRequestHandler<%##%RegisterCommand, ResponseCommand>
+{
+    private readonly IStringLocalizer _localizer;
+    private readonly I%##%Repository _repository;
+
+    public %##%RegisterCommandHandler(IStringLocalizer localizer, I%##%Repository repository)
+    {
+        _localizer = localizer;
+        _repository = repository;
+    }
+
+    public async Task<ResponseCommand> Handle(%##%RegisterCommand request, CancellationToken cancellationToken)
+    {
+        %##% %#lower#% = new(request.Name);
+
+        await _repository.InsertAsync(%#lower#%);
+
+        return new ResponseCommand(entity.Id);
+    }
+}

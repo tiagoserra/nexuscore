@@ -1,0 +1,30 @@
+using Application.Common.Attributes;
+using Application.Common.Commands;
+using Application.Common.Enums;
+using Application.%#MODULE#%.Interfaces;
+using Domain.%#MODULE#%.Permissions;
+using MediatR;
+
+namespace Application.%#MODULE#%.CommandHandlers;
+
+public class %##%GetAllWithPaginationCommandQueryHandler : IRequestHandler<%##%GetAllWithPaginationCommandQuery, ResponseCommand>
+{
+    private readonly IStringLocalizer _localizer;
+    private readonly I%##%Repository _repository;
+
+    public %##%GetAllWithPaginationCommandQueryHandler(IStringLocalizer localizer, I%##%Repository repository)
+    {
+        _localizer = localizer;
+        _repository = repository;
+    }
+
+    public async Task<Response> Handle(%##%GetAllWithPaginationCommandQuery request, CancellationToken cancellationToken)
+    {
+        var result = await _repository.GetByPaginatedAsync(request.PageNumber, request.PageSize);
+
+        if(result is null)
+            return new ResponseCommand(ResponseStatusCommand.NotFound)
+
+        return new ResponseCommand(result)
+    }
+}

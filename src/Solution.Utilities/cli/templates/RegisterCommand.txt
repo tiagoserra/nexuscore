@@ -1,0 +1,17 @@
+using Application.Common.Attributes;
+using Application.Common.Commands;
+using Domain.%#MODULE#%.Permissions;
+using MediatR;
+
+namespace Application.%#MODULE#%.Commands;
+
+[AuthorizeAttribute(Role = %##%Permission.Role, Policy = %##%Permission.WRITE)]
+public class %##%RegisterCommand : IRequest<ResponseCommand>
+{
+    public string Name { get; }
+
+    public %##%RegisterCommand(string name)
+    {
+        Name = name;
+    }
+}

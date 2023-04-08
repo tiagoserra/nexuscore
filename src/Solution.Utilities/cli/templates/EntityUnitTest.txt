@@ -1,3 +1,5 @@
+using Domain.%#MODULE#%.Entities;
+
 namespace UnitTests.Domain.%#MODULE#%.Entities;
 
 public class %##%Tests

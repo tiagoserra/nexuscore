@@ -1,0 +1,8 @@
+using Domain.%#MODULE#%.Entities;
+
+namespace Application.%#MODULE#%.Interfaces;
+
+public interface I%##%Repository : IRepository<%##%>
+{
+
+}

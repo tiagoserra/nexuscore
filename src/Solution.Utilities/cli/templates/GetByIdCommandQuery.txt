@@ -5,7 +5,7 @@ using MediatR;
 
 namespace Application.%#MODULE#%.CommandQueries;
 
-[AuthorizeAttribute(Role = %##%Permission.Role, Policy = %##%Permission.READ)]
+[AuthorizeAttribute(Role = %##%Permission.Role, Policy = %##%Permission.Policy.Read)]
 public class %##%GetByIdCommandQuery : IRequest<ResponseCommand>
 {
     public long Id { get; }

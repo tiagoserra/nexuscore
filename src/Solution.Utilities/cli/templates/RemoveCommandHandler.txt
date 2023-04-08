@@ -1,7 +1,9 @@
-using Application.Common.Attributes;
+using Microsoft.Extensions.Localization;
 using Application.Common.Commands;
+using Application.Common.Enums;
+using Application.%#MODULE#%.Commands;
 using Application.%#MODULE#%.Interfaces;
-using Domain.%#MODULE#%.Permissions;
+using Domain.%#MODULE#%.Entities;
 using MediatR;
 
 namespace Application.%#MODULE#%.CommandHandlers;
@@ -22,9 +24,7 @@ public class %##%RemoveCommandHandler : IRequestHandler<%##%RemoveCommand, Respo
         %##% %#lower#% = await _repository.GetByIdAsync(request.Id);
 
         if(%#lower#% is null)
-            return new ResponseCommand(ResponseStatusCommand.NotFound)
-
-        %#lower#%.Name = request.Name;
+            return new ResponseCommand(ResponseStatusCommand.NotFound);
 
         await _repository.DeleteAsync(%#lower#%);
 

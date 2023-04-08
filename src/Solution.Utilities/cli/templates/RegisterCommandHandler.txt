@@ -1,7 +1,9 @@
-using Application.Common.Attributes;
+using Microsoft.Extensions.Localization;
 using Application.Common.Commands;
+using Application.Common.Enums;
+using Application.%#MODULE#%.Commands;
 using Application.%#MODULE#%.Interfaces;
-using Domain.%#MODULE#%.Permissions;
+using Domain.%#MODULE#%.Entities;
 using MediatR;
 
 namespace Application.%#MODULE#%.CommandHandlers;
@@ -23,6 +25,6 @@ public class %##%RegisterCommandHandler : IRequestHandler<%##%RegisterCommand, R
 
         await _repository.InsertAsync(%#lower#%);
 
-        return new ResponseCommand(entity.Id);
+        return new ResponseCommand(user.Id);
     }
 }

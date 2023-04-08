@@ -1,6 +1,36 @@
 namespace UnitTests.Application.%#MODULE#%.Commands;
 
-public class %##%AlterCommandHandlerUnitTests
+public class %##%RegisterCommandHandlerUnitTests
 {
-   
+    private readonly Mock<IStringLocalizer> _mockLocalizer;
+    private readonly Mock<I%##%Repository> _mockRepository;
+
+    public %##%RegisterCommandHandlerUnitTests()
+    {
+        _mockLocalizer = new Mock<IStringLocalizer>();
+        _mockRepository = new Mock<I%##%Repository>();
+    }
+
+    [Fact]
+    public async Task Handle_ShouldRegister%##%AndReturnResponseCommand()
+    {
+        // Arrange
+        var name = "Test %##%";
+        var id = 1;
+        var %#lower#%RegisterCommand = new %##%RegisterCommand(name);
+
+        _mockRepository.Setup(repo => repo.InsertAsync(It.IsAny<%##%>()))
+            .Callback<%##%>(%#lower#% => %#lower#%.Id = id)
+            .Returns(Task.CompletedTask);
+
+        var handler = new %##%RegisterCommandHandler(_mockLocalizer.Object, _mockRepository.Object);
+
+        // Act
+        var result = await handler.Handle(%#lower#%RegisterCommand, CancellationToken.None);
+
+        // Assert
+        Assert.NotNull(result);
+        Assert.Equal(id, result.ConvertTo<long>());
+        _mockRepository.Verify(repo => repo.InsertAsync(It.IsAny<%##%>()), Times.Once);
+    }
 }

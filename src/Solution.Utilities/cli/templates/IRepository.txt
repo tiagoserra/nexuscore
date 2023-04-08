@@ -1,3 +1,4 @@
+using Application.Common.Interfaces;
 using Domain.%#MODULE#%.Entities;
 
 namespace Application.%#MODULE#%.Interfaces;

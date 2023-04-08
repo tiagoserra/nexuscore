@@ -76,9 +76,9 @@ unitTestsHandler() {
         mkdir -p $pathUnitTestDestination'/Commands/'
     fi
 
-    replaceInFile $pathUnitTestDestination'/Entities/'$EntityName'RegisterCommandHandler.cs' 'templates/AlterCommandHandlerUnitTests.txt'
-    replaceInFile $pathUnitTestDestination'/Entities/'$EntityName'AlterCommandHandler.cs' 'templates/AlterCommandHandlerUnitTests.txt'
-    replaceInFile $pathUnitTestDestination'/Entities/'$EntityName'RemoveCommandValidation.cs' 'templates/RemoveCommandHandlerUnitTests.txt'
+    replaceInFile $pathUnitTestDestination'/Commands/'$EntityName'RegisterCommandHandler.cs' 'templates/RegisterCommandHandlerUnitTests.txt'
+    replaceInFile $pathUnitTestDestination'/Commands/'$EntityName'AlterCommandHandler.cs' 'templates/AlterCommandHandlerUnitTests.txt'
+    replaceInFile $pathUnitTestDestination'/Commands/'$EntityName'RemoveCommandValidation.cs' 'templates/RemoveCommandHandlerUnitTests.txt'
 
 }
 

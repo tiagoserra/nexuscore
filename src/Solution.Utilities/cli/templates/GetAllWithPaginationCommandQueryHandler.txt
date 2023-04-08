@@ -1,8 +1,8 @@
-using Application.Common.Attributes;
+using Microsoft.Extensions.Localization;
 using Application.Common.Commands;
 using Application.Common.Enums;
+using Application.%#MODULE#%.CommandQueries;
 using Application.%#MODULE#%.Interfaces;
-using Domain.%#MODULE#%.Permissions;
 using MediatR;
 
 namespace Application.%#MODULE#%.CommandHandlers;
@@ -18,13 +18,13 @@ public class %##%GetAllWithPaginationCommandQueryHandler : IRequestHandler<%##%G
         _repository = repository;
     }
 
-    public async Task<Response> Handle(%##%GetAllWithPaginationCommandQuery request, CancellationToken cancellationToken)
+    public async Task<ResponseCommand> Handle(%##%GetAllWithPaginationCommandQuery request, CancellationToken cancellationToken)
     {
         var result = await _repository.GetByPaginatedAsync(request.PageNumber, request.PageSize);
 
         if(result is null)
-            return new ResponseCommand(ResponseStatusCommand.NotFound)
+            return new ResponseCommand(ResponseStatusCommand.NotFound);
 
-        return new ResponseCommand(result)
+        return new ResponseCommand(result);
     }
 }

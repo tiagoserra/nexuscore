@@ -1,6 +1,68 @@
+using Application.Common.Enums;
+using Application.%#MODULE#%.CommandHandlers;
+using Application.%#MODULE#%.Commands;
+using Application.%#MODULE#%.Interfaces;
+using Domain.%#MODULE#%.Entities;
+using Microsoft.Extensions.Localization;
+using Moq;
+
 namespace UnitTests.Application.%#MODULE#%.Commands;
 
 public class %##%AlterCommandUnitTests
 {
+    [Fact]
+    public async Task Handle_%##%Exists_ShouldAlterNameAndReturnUpdated%##%()
+    {
+        // Arrange
+        long id = 1;
+        string originalName = "Name";
+        string newName = "Other Name";
 
+        var %#lower#% = new %##%(originalName);
+        var command = new %##%AlterCommand(id, newName);
+
+        var localizerMock = new Mock<IStringLocalizer>();
+        var repositoryMock = new Mock<I%##%Repository>();
+
+        repositoryMock.Setup(r => r.GetByIdAsync(id)).ReturnsAsync(%#lower#%);
+        repositoryMock.Setup(r => r.UpdateAsync(%#lower#%)).Returns(Task.CompletedTask);
+
+        var handler = new %##%AlterCommandHandler(localizerMock.Object, repositoryMock.Object);
+
+        // Act
+        var response = await handler.Handle(command, CancellationToken.None);
+
+        // Assert
+        Assert.Equal(ResponseStatusCommand.Ok, response.Status);
+        Assert.Equal(newName, ((%#lower#%)response.Result).Name);
+
+        repositoryMock.Verify(r => r.GetByIdAsync(id), Times.Once);
+        repositoryMock.Verify(r => r.UpdateAsync(%#lower#%), Times.Once);
+    }
+
+    [Fact]
+    public async Task Handle_%##%DoesNotExist_ShouldReturnNotFoundResponse()
+    {
+        // Arrange
+        long id = 1;
+        string newName = "Other Name";
+
+        var command = new %##%AlterCommand(id, newName);
+
+        var localizerMock = new Mock<IStringLocalizer>();
+        var repositoryMock = new Mock<I%##%Repository>();
+
+        repositoryMock.Setup(r => r.GetByIdAsync(id)).ReturnsAsync((%##%)null);
+
+        var handler = new %##%AlterCommandHandler(localizerMock.Object, repositoryMock.Object);
+
+        // Act
+        var response = await handler.Handle(command, CancellationToken.None);
+
+        // Assert
+        Assert.Equal(ResponseStatusCommand.NotFound, response.Status);
+
+        repositoryMock.Verify(r => r.GetByIdAsync(id), Times.Once);
+        repositoryMock.Verify(r => r.UpdateAsync(It.IsAny<%##%>()), Times.Never);
+    }
 }

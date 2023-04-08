@@ -5,7 +5,7 @@ using MediatR;
 
 namespace Application.%#MODULE#%.Commands;
 
-[AuthorizeAttribute(Role = %##%Permission.Role, Policy = %##%Permission.WRITE)]
+[AuthorizeAttribute(Role = %##%Permission.Role, Policy = %##%Permission.Policy.Write)]
 public class %##%AlterCommand : IRequest<ResponseCommand>
 {
     public long Id { get; }

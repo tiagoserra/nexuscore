@@ -4,7 +4,7 @@ namespace Domain.Common.Entities;
 
 public abstract class Entity
 {
-    public long Id { get; }
+    public long Id { get; set; }
     public DateTime CreatedOn { get; private set; }
     public string CreatedBy { get; private set; }
     public DateTime? ModifiedOn { get; private set; }

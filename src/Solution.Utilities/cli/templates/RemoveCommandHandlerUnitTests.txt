@@ -2,5 +2,58 @@ namespace UnitTests.Application.%#MODULE#%.Commands;
 
 public class %##%RemoveCommandUnitTests
 {
+    [Fact]
+    public async Task Handle_%##%Exists_ShouldRemove%##%AndReturnOk()
+    {
+        // Arrange
+        var repositoryMock = new Mock<I%##%Repository>();
+        var localizerMock = new Mock<IStringLocalizer>();
 
+        long id = 1;
+        %##% %#lower#% = new %##%("Test");
+
+        repositoryMock
+            .Setup(repo => repo.GetByIdAsync(id))
+            .ReturnsAsync(%#lower#%);
+
+        repositoryMock
+            .Setup(repo => repo.DeleteAsync(%#lower#%))
+            .Returns(Task.CompletedTask);
+
+        var handler = new %##%RemoveCommandHandler(localizerMock.Object, repositoryMock.Object);
+        var command = new %##%RemoveCommand(id);
+
+        // Act
+        var response = await handler.Handle(command, CancellationToken.None);
+
+        // Assert
+        Assert.Equal(ResponseStatusCommand.Ok, response.Status);
+        repositoryMock.Verify(repo => repo.GetByIdAsync(id), Times.Once());
+        repositoryMock.Verify(repo => repo.DeleteAsync(%#lower#%), Times.Once());
+    }
+
+    [Fact]
+    public async Task Handle_%##%NotFound_ShouldReturnNotFound()
+    {
+        // Arrange
+        var repositoryMock = new Mock<I%##%Repository>();
+        var localizerMock = new Mock<IStringLocalizer>();
+
+        long id = 1;
+
+        repositoryMock
+            .Setup(repo => repo.GetByIdAsync(id))
+            .ReturnsAsync((%##%)null);
+
+        var handler = new %##%RemoveCommandHandler(localizerMock.Object, repositoryMock.Object);
+        var command = new %##%RemoveCommand(id);
+
+        // Act
+        var response = await handler.Handle(command, CancellationToken.None);
+
+        // Assert
+        Assert.Equal(ResponseStatusCommand.NotFound, response.Status);
+        repositoryMock.Verify(repo => repo.GetByIdAsync(id), Times.Once());
+        repositoryMock.Verify(repo => repo.DeleteAsync(It.IsAny<%##%>()), Times.Never());
+    }
 }

@@ -5,7 +5,7 @@ using MediatR;
 
 namespace Application.%#MODULE#%.Commands;
 
-[AuthorizeAttribute(Role = %##%Permission.Role, Policy = %##%Permission.DELETE)]
+[AuthorizeAttribute(Role = %##%Permission.Role, Policy = %##%Permission.Policy.Delete)]
 public class %##%RemoveCommand : IRequest<ResponseCommand>
 {
     public long Id { get; }

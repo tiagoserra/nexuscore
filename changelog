@@ -1,3 +1,10 @@
+Sat Apr 08 16:32:00 UTC 2023
+Improvement
+    Add Unit tests to handler commands
+Fix 
+    Fix  Nexus ClI handler Infracstructure when create files
+    Fix  Nexus ClI handler Application when create files
++--------------------------+
 Sat Apr 08 15:39:00 UTC 2023
 Improvement
     Alter Nexus ClI add handlers to layer Infracstructure

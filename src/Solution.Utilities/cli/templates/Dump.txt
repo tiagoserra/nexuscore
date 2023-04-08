@@ -1,0 +1,20 @@
+using Application.%#MODULE#%.CommandQueries;
+using Application.%#MODULE#%.Commands;
+using Domain.%#MODULE#%.Entities;
+using Microsoft.Extensions.Localization;
+using MediatR;
+
+namespace Infrastructure.Manager.%#MODULE#%.Dumps;
+
+internal class %##%Dump : Dump<%##%, %##%GetByIdCommandQuery, %##%RegisterCommand>
+{
+    public %##%Dump(IExecutionContext executionContext, IStringLocalizer localizer, IMediator mediator)
+        :base(executionContext, localizer, mediator, "%##%Dump")
+    {
+    }
+
+    public override async Task DumpAsync()
+    {
+        await SaveAsync(new %##%GetByIdCommandQuery(1), new %##%RegisterCommand("%##%"));
+    }
+}

@@ -4,19 +4,20 @@
 #   Author: Tiago Serra
 #   Date: 08/04/2023 09:00
 #   Summary: Script to create files in layers
-#   Comments: how to call script ./nexus-cli.sh ModuleName EntityName yes no
+#   Comments: how to call script ./nexus-cli.sh ModuleName EntityName yes yes
 #   Tips: chmod +x nexus-cli.sh
 #
 #   ModuleName => module
 #   EntityName => entity
 #   yes => to create unit tests
-#   yes => to create seed
+#   yes => to create dump
 #
 #----------------------------------------------------------------------------------------------------------------------------------------
 
 ModuleName=$1
 EntityName=$2
 WithUnitTest=$3
+WithDump=$4
 
 if [[ -z "$ModuleName" ]]; then
     echo ERROR: "argument error (ModuleName) "
@@ -145,6 +146,21 @@ applicationHandler() {
     replaceInFile $pathApplicationInterfaces'/I'$EntityName'Repository.cs' 'templates/IRepository.txt'
 
     infrastructureHandler
+
+    if [ $Dump = 'yes' ]; then
+
+        echo 'Add dump in Infrastructure Manager'
+
+        pathDestination='../../Infrastructure.Manager/'$ModuleName
+        pathDestinationDump=$pathApplicationDestination'/Dumps/'
+
+        if [ ! -f "$pathDestination" ]; then
+            mkdir -p $pathApplicationDestination
+            mkdir -p $pathDestinationDump
+        fi
+
+        replaceInFile $pathDestinationDump'/'$EntityName'Dump.cs' 'templates/Dump.txt'
+    fi
 
 }
 

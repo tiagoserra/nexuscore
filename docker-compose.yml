@@ -1,0 +1,27 @@
+version: '3.9'
+
+services:
+
+  postgresdb:
+    image: postgres
+    container_name: postgres_nexuscore
+    restart: unless-stopped
+    environment:
+      POSTGRES_PASSWORD: UPjhg?eLKhAs9?:*jR%Ta?-zz
+    ports:
+      - "5432:5432"
+    volumes:
+      - nexuscore-storage:/var/lib/postgresql/data/
+      - ./src/solution-utilities/docker:/infile
+    networks:
+      - bridge-network
+
+networks:
+  bridge-network:
+    driver: bridge
+
+volumes:
+  nexuscore-storage:
+    external: true
+    
+# docker volume create nexuscore-storage

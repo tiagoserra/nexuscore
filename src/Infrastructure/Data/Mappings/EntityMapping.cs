@@ -34,5 +34,7 @@ public abstract class EntityMapping<TEntity> : IEntityTypeConfiguration<TEntity>
             .HasColumnName("modified_by")
             .HasMaxLength(255)
             .HasColumnType("VARCHAR(256)");
+
+        builder.Ignore(e => e.DomainEvents);
     }
 }

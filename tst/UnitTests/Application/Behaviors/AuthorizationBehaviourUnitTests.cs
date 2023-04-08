@@ -3,7 +3,7 @@ using Application.Common.Behaviors;
 using Application.Common.Commands;
 using Application.Common.Enums;
 using Application.Common.Interfaces;
-using Application.Common.Permissions;
+using Domain.Common.Permissions;
 using MediatR;
 using Moq;
 

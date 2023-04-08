@@ -3,7 +3,6 @@ using Application.Common.Behaviors;
 using Application.Common.Commands;
 using MediatR;
 using Moq;
-using Xunit.Abstractions;
 
 namespace UnitTests.Application.Behaviors;
 
@@ -60,10 +59,8 @@ public class TestLogger<T> : ILogger<T>
 {
     public List<string> LoggedMessages { get; } = new List<string>();
 
-    public IDisposable BeginScope<TState>(TState state)
-    {
-        return null;
-    }
+    public IDisposable BeginScope<TState>(TState state) 
+        => null;
 
     public bool IsEnabled(LogLevel logLevel)
     {

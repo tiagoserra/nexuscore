@@ -1,7 +1,4 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using Domain.Common.Events;
 
 namespace Domain.Common.Entities;
 
@@ -12,6 +9,8 @@ public abstract class Entity
     public string CreatedBy { get; private set; }
     public DateTime? ModifiedOn { get; private set; }
     public string ModifiedBy { get; private set; }
+    private readonly List<DomainEvent> _domainEvents = new();
+    public IReadOnlyCollection<DomainEvent> DomainEvents => _domainEvents.AsReadOnly();
 
     public void SetCreation(string createdBy)
     {
@@ -24,4 +23,13 @@ public abstract class Entity
         ModifiedBy = modifiedBy;
         ModifiedOn = DateTime.Now;
     }
+
+    public void AddDomainEvent(DomainEvent domainEvent)
+        => _domainEvents.Add(domainEvent);
+
+    public void RemoveDomainEvent(DomainEvent domainEvent)
+        => _domainEvents.Remove(domainEvent);
+
+    public void ClearDomainEvents()
+        => _domainEvents.Clear();
 }

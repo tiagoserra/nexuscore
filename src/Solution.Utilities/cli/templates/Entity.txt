@@ -1,0 +1,20 @@
+namespace Domain.%#MODULE#%.Entities;
+
+public class %##% : Entity
+{
+    public string Name { get; private set; }
+
+    public %##%(string name)
+    {
+        DomainException.When(string.IsNullOrEmpty(name), "Invalid name. Name is required");
+        Name = name;
+    }
+
+    protected %##%() { }
+
+    public void AlterName(string name)
+    {
+        DomainException.When(string.IsNullOrEmpty(name), "Invalid name. Name is required");
+        Name = name;
+    }
+}

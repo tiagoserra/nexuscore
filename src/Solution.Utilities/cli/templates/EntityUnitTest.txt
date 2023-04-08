@@ -1,0 +1,14 @@
+namespace UnitTests.Domain.%#MODULE#%.Entities;
+
+public class %##%Tests
+{
+    [Fact]
+    public void Create_%##%()
+    {
+        // Act
+        var entity = new %##%("name");
+
+        // Assert
+        Assert.Equal("name", entity.Name);
+    }
+}

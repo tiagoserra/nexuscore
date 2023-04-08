@@ -1,0 +1,14 @@
+namespace Domain.%#MODULE#%.Permissions;
+
+public static class %##%Permission
+{
+    public const string Module = "%#module_lower#%";
+    public const string Role = "role::%#module_lower#%::%#lower#%";
+
+    public static class Policy 
+    {
+        public const string Read = "policy::%#module_lower#%::%#lower#%::read"; 
+        public const string Write = "policy::%#module_lower#%::%#lower#%::write"; 
+        public const string Delete = "policy::%#module_lower#%::%#lower#%::delete";
+    }
+}

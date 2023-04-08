@@ -1,7 +1,7 @@
 using Application.Common.Commands;
 using Application.Common.Enums;
 
-namespace UnitTests.Application.Common;
+namespace UnitTests.Application.Common.Commands;
 
 public class ResponseCommandUnitTests
 {

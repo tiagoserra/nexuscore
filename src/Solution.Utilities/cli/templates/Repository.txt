@@ -1,0 +1,12 @@
+using Domain.%#MODULE#%.Entities;
+using Application.%#MODULE#%.Interfaces;
+
+namespace Infrastructure.Data.Repositories;
+
+public class %##%Repository : Repository<%##%>, I%##%Repository
+{
+     public %##%Repository(SqlContext context)
+        : base(context)
+    {
+    }
+}

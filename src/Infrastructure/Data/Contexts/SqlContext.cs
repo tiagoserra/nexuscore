@@ -2,6 +2,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using System.Reflection;
 using Microsoft.EntityFrameworkCore;
 using Domain.Common.Entities;
+//%#Domain#%
 
 namespace Infrastructure.Data.Contexts;
 

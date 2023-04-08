@@ -4,7 +4,7 @@ using Application.Common.Commands;
 using MediatR;
 using Moq;
 
-namespace UnitTests.Application.Behaviors;
+namespace UnitTests.Application.Common.Behaviors;
 
 public class PerformanceBehaviourUnitTests
 {

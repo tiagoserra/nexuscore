@@ -2,6 +2,7 @@ using Application.Common.Attributes;
 using Application.Common.Commands;
 using Application.Common.Enums;
 using Application.%#MODULE#%.Interfaces;
+using Domain.%#MODULE#%.Entities;
 using Domain.%#MODULE#%.Permissions;
 using MediatR;
 

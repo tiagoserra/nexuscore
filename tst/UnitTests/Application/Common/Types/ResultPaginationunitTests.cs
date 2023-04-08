@@ -1,6 +1,6 @@
 using Application.Common.Types;
 
-namespace UnitTests.Application.Types;
+namespace UnitTests.Application.Common.Types;
 
 public class ResultPaginationunitTests
 {

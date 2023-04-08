@@ -39,6 +39,7 @@ replaceContentByReplaceIfNotExists() {
     if [ $result -eq 0 ]; then
         sed -i '' "s|$1|$2|g" $3
     fi
+
 }
 
 replaceInFile() {
@@ -53,6 +54,7 @@ replaceInFile() {
     replace '%#lower#%' $(echo $EntityName | tr '[:upper:]' '[:lower:]') $pathFileDestination
     replace '%#schema#%' $ModuleName $pathFileDestination
     replace '%#module_lower#%' $(echo $ModuleName | tr '[:upper:]' '[:lower:]') $pathFileDestination
+
 }
 
 unitTestsHandler() {
@@ -66,6 +68,17 @@ unitTestsHandler() {
     fi
 
     replaceInFile $pathUnitTestDestination'/Entities/'$EntityName'UnitTests.cs' 'templates/EntityUnitTest.txt'
+
+    pathUnitTestDestination='../../../tst/UnitTests/Application/'$ModuleName
+
+    if [ ! -f "$pathUnitTestDestination" ]; then
+        mkdir -p $pathUnitTestDestination
+        mkdir -p $pathUnitTestDestination'/Commands/'
+    fi
+
+    replaceInFile $pathUnitTestDestination'/Entities/'$EntityName'RegisterCommandHandler.cs' 'templates/AlterCommandHandlerUnitTests.txt'
+    replaceInFile $pathUnitTestDestination'/Entities/'$EntityName'AlterCommandHandler.cs' 'templates/AlterCommandHandlerUnitTests.txt'
+    replaceInFile $pathUnitTestDestination'/Entities/'$EntityName'RemoveCommandValidation.cs' 'templates/RemoveCommandHandlerUnitTests.txt'
 
 }
 
@@ -130,6 +143,29 @@ applicationHandler() {
     replaceInFile $pathApplicationCommandHandlers'/'$EntityName'GetAllWithPaginationCommandQueryHandler.cs' 'templates/GetAllWithPaginationCommandQueryHandler.txt'
 
     replaceInFile $pathApplicationInterfaces'/I'$EntityName'Repository.cs' 'templates/IRepository.txt'
+
+    infrastructureHandler
+
+}
+
+infrastructureHandler() {
+
+    echo 'Add in Infrastructure'
+    pathMappingDestination='../../Infrastructure/Data/Mappings/'$EntityName'Mapping.cs'
+    replaceInFile $pathMappingDestination 'templates/Mapping.txt'
+
+    pathRepositoryDestination='../../Infrastructure/Data/Repositories/'$EntityName'Repository.cs'
+    replaceInFile $pathRepositoryDestination 'templates/Repository.txt'
+
+    pathContextDestination="../../Infrastructure/Data/Contexts/SqlContext.cs"
+
+    line='using Domain.'$ModuleName'.Entities;'
+    replacerNewString=$line' \n//%#Domain#%'
+    replaceContentByReplaceIfNotExists '//%#Domain#%' "$replacerNewString" $pathContextDestination "$line"
+
+    line='public DbSet<'$EntityName'> '$EntityName's { get; set; }'
+    replacerNewString=$line'  \n \t//%#DbSet#%'
+    replaceContentByReplaceIfNotExists '//%#DbSet#%' "$replacerNewString" $pathContextDestination "$line"
 
 }
 

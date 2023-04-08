@@ -7,7 +7,7 @@ using Domain.Common.Permissions;
 using MediatR;
 using Moq;
 
-namespace UnitTests.Application.Behaviors;
+namespace UnitTests.Application.Common.Behaviors;
 
 [AuthorizeAttribute(Role = "role", Policy = "policy")]
 public class CommandTestPermission : IRequest<ResponseCommand>

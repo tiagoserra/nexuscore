@@ -4,7 +4,7 @@ using Domain.Common.Exceptions;
 using MediatR;
 using Moq;
 
-namespace UnitTests.Application.Behaviors;
+namespace UnitTests.Application.Common.Behaviors;
 
 public class UnhandledExceptionBehaviourUnitTests
 {

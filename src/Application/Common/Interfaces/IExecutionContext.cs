@@ -5,4 +5,6 @@ public interface IExecutionContext
     bool HasRole(string role);
 
     bool HasPolicy(string policy);
+
+    Guid ExecutionId { get; }
 }

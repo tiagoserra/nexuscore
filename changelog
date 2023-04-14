@@ -1,3 +1,13 @@
+Fri Apr 08 18:37:00 UTC 2023
+Feature
+    Add smart cache behavior
+Up
+    FluentValidation to 11.5.2
+    FluentValidation.DependencyInjectionExtensions to 11.5.2
+    Microsoft.Extensions.Localization.Abstractions to 7.0.5
+    Microsoft.NET.Test.Sdk to 17.5.0
+    coverlet.collector to 3.2.0
++--------------------------+
 Sat Apr 08 18:48:00 UTC 2023
 Feature
     Add layer Infracstructure Manager

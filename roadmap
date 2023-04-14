@@ -1,7 +1,4 @@
-CLI
-    Add scripts bash to create files in layers
-
-Infrastructure
-    Add layer manager database
-        Create script database
-        Create initial seeds
+Add integrationTests
+Add audit in commands
+Add metrics (grafana, watchdog)
+implement ICache (redis) 

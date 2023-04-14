@@ -9,4 +9,7 @@ public class ExecutionContext : IExecutionContext
 
     public bool HasRole(string role)
         => true;
+
+    public Guid ExecutionId
+        => new Guid(); 
 }

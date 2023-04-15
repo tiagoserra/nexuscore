@@ -32,9 +32,17 @@ public abstract class Dump<TEntity, TQuery, TCommand> : IDump
 
     protected virtual async Task<bool> CanSaveAsync(TQuery query)
     {
-        var result = await Mediator.Send(query);
+        try
+        {
+            var result = await Mediator.Send(query);
 
-        return result is null || result.Status == ResponseStatusCommand.NotFound;
+            return result is null || result.Status == ResponseStatusCommand.NotFound;
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            throw;
+        }
     }
 
     protected virtual async Task SaveAsync(TQuery query, TCommand command)

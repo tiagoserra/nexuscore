@@ -7,6 +7,7 @@ using Infrastructure.Manager.Interfaces;
 using Infrastructure.Manager.Scripts;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 
 namespace Infrastructure.Manager;
 
@@ -51,15 +52,25 @@ public class Startup
             _scriptRunner.Run(_action is EnvironmentDumpActionManager.Reset);
         }
 
+        _serviceCollection.AddLogging(config =>
+        {
+            config.AddDebug();
+            config.AddConsole();
+        });
+
         _serviceCollection.AddScoped<IExecutionContext, Infrastructure.Manager.Common.ExecutionContext>();
         _serviceCollection.AddApplication();
         _serviceCollection.AddInfracstruture(_configuration);
 
-        _serviceCollection.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(Assembly.GetAssembly(typeof(ApplicationConfiguration))));
-        _serviceCollection.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly()));
+        _serviceCollection.AddMediatR(cfg =>
+            {
+                cfg.RegisterServicesFromAssembly(typeof(ApplicationConfiguration).Assembly);
+                cfg.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly());
+            }
+        );
 
         AddDumps(_serviceCollection);
-        
+
         _serviceProvider = _serviceCollection.BuildServiceProvider();
 
         ConsoleDraw.DrawFeedBack("Dumps: ");
@@ -75,9 +86,9 @@ public class Startup
     private static Type[] GetClassDump()
     {
         return (from asm in AppDomain.CurrentDomain.GetAssemblies()
-            from type in asm.GetTypes()
-            where type.IsClass && type.Name.EndsWith("Dump")
-            select type).ToArray();
+                from type in asm.GetTypes()
+                where type.IsClass && type.Name.EndsWith("Dump")
+                select type).ToArray();
     }
 
     private void AddDumps(IServiceCollection services)

@@ -1,4 +1,13 @@
 Sat Apr 15 15:55:00 UTC 2023
+Fix
+    Problem reference Ilogger on Infrastructure.Manager
+    Reference Mediatr on Infrastructure.Manager 
+    Fix connection string name on Infrastructure
+Improvement
+    Add Dump globalization
+    Add alter docker compose to Sql Azure
++--------------------------+
+Sat Apr 15 15:55:00 UTC 2023
 Feature
     System globalization
 Fix

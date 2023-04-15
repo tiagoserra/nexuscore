@@ -20,7 +20,7 @@ public static class InfrastructureConfiguration
 
         services.AddStackExchangeRedisCache(options =>
         {
-           options.Configuration = configuration.GetConnectionString("ConCahce");
+           options.Configuration = configuration.GetConnectionString("ConnCache");
            options.InstanceName = configuration.GetValue<string>("Environment:dentifier");
         });
 

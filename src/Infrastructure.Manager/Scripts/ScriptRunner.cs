@@ -2,7 +2,6 @@ using System.Text.RegularExpressions;
 using Microsoft.Extensions.Configuration;
 using DbUp;
 using DbUp.ScriptProviders;
-using Npgsql;
 
 namespace Infrastructure.Manager.Scripts;
 
@@ -17,7 +16,7 @@ internal class ScriptRunner
     public void Run(bool dropDatabase)
     {
         if (dropDatabase)
-            DropDatabase();
+            DropDatabase.For.SqlDatabase(_configuration.GetConnectionString("ConnSql"));
 
         RunScripts("Scripts/runAfter/");
         RunScripts("Scripts/tables/");
@@ -28,23 +27,6 @@ internal class ScriptRunner
         RunScripts("Scripts/runBefore/");
     }
 
-    private void DropDatabase()
-    {
-        NpgsqlConnectionStringBuilder builder = new(_configuration.GetConnectionString("ConnSql"));
-        var databaseName = builder.Database;
-        builder.Database = builder.Username;
-
-        using NpgsqlConnection connection = new(builder.ToString());
-        connection.Open();
-
-        using var command =
-            new NpgsqlCommand(
-                $"SELECT pg_terminate_backend(pg_stat_activity.pid) FROM pg_stat_activity WHERE pg_stat_activity.datname = \'{databaseName}\'; DROP DATABASE IF EXISTS \"{databaseName}\"");
-
-        command.ExecuteNonQuery();
-        connection.Close();
-    }
-
     private void RunScripts(string scriptPath)
     {
         var exePath = Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
@@ -52,7 +34,7 @@ internal class ScriptRunner
 
         var upgradeEngine = DeployChanges
             .To
-            .PostgresqlDatabase(_configuration.GetConnectionString("ConnSql"))
+            .SqlDatabase(_configuration.GetConnectionString("ConnSql"))
             .WithScriptsFromFileSystem
             (
                 Path.Combine(rootPath, scriptPath), new FileSystemScriptOptions

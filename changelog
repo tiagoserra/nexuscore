@@ -1,3 +1,10 @@
+Sat Apr 08 14:24:00 UTC 2023
+Improvement
+    Alter database Postgres to Azure SQL
+Feature
+    Implement ICache
+    Add Interface IEmailService
++--------------------------+
 Fri Apr 08 18:37:00 UTC 2023
 Feature
     Add smart cache behavior

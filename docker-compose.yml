@@ -2,19 +2,32 @@ version: '3.9'
 
 services:
 
-  postgresdb:
-    image: postgres
-    container_name: postgres_nexuscore
+  azure-sql-db:
+    image: mcr.microsoft.com/azure-sql-edge:latest
+    container_name: azure-sql-edge
     restart: unless-stopped
+    user: root
     environment:
-      POSTGRES_PASSWORD: UPjhg?eLKhAs9?:*jR%Ta?-zz
+          SA_PASSWORD: "UPjhg?eLKhAs9?:*jR%Ta?-zz"
+          ACCEPT_EULA: "Y"
+          MSSQL_PID: Developer
     ports:
-      - "5432:5432"
+        - "1433:1433"
     volumes:
-      - nexuscore-storage:/var/lib/postgresql/data/
-      - ./src/solution-utilities/docker:/infile
+        - nexuscore-storage:/var/opt/mssql
     networks:
-      - bridge-network
+        - bridge-network
+
+  redis:
+    image: redis:alpine
+    container_name: redis
+    restart: unless-stopped
+    volumes:
+        - nexuscore-storage:/data
+    ports:
+        - "6379:6379"
+    networks:
+        - bridge-network
 
 networks:
   bridge-network:

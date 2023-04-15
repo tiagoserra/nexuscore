@@ -12,12 +12,14 @@ public static class InfrastructureConfiguration
     public static IServiceCollection AddInfracstruture(this IServiceCollection services, IConfiguration configuration)
     {
         services.AddDbContext<SqlContext>(
-            options => options.UseNpgsql(
+            options => options.UseSqlServer(
                 configuration.GetConnectionString("ConnSql"), b => b.MigrationsAssembly(typeof(SqlContext).Assembly.FullName)
             )
         );
 
         services.AddScoped<SqlContext>();
+
+        services.AddSingleton<ICache, CacheContext>();
 
         services.Scan(scan => scan
             .FromAssemblyOf<SqlContext>()

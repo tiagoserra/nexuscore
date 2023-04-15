@@ -2,6 +2,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using System.Reflection;
 using Microsoft.EntityFrameworkCore;
 using Domain.Common.Entities;
+using Domain.Core.Entities; 
 //%#Domain#%
 
 namespace Infrastructure.Data.Contexts;
@@ -18,7 +19,8 @@ public class SqlContext : DbContext
 
     #region DbSets
 
-    //%#DbSet#%
+    public DbSet<SystemGlobalization> SystemGlobalizations { get; set; }  
+ 	//%#DbSet#%
 
     #endregion
 

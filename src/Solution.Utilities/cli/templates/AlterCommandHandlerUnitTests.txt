@@ -34,7 +34,7 @@ public class %##%AlterCommandUnitTests
 
         // Assert
         Assert.Equal(ResponseStatusCommand.Ok, response.Status);
-        Assert.Equal(newName, ((%#lower#%)response.Result).Name);
+        Assert.Equal(newName, ((%##%)response.Result).Name);
 
         repositoryMock.Verify(r => r.GetByIdAsync(id), Times.Once);
         repositoryMock.Verify(r => r.UpdateAsync(%#lower#%), Times.Once);

@@ -25,6 +25,6 @@ public class %##%RegisterCommandHandler : IRequestHandler<%##%RegisterCommand, R
 
         await _repository.InsertAsync(%#lower#%);
 
-        return new ResponseCommand(user.Id);
+        return new ResponseCommand(%#lower#%.Id);
     }
 }

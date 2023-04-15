@@ -1,3 +1,11 @@
+using Application.Common.Enums;
+using Application.%#MODULE#%.CommandHandlers;
+using Application.%#MODULE#%.Commands;
+using Application.%#MODULE#%.Interfaces;
+using Domain.%#MODULE#%.Entities;
+using Microsoft.Extensions.Localization;
+using Moq;
+
 namespace UnitTests.Application.%#MODULE#%.Commands;
 
 public class %##%RegisterCommandHandlerUnitTests

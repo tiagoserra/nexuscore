@@ -15,23 +15,23 @@ public abstract class EntityMapping<TEntity> : IEntityTypeConfiguration<TEntity>
 
         builder.Property(p => p.CreatedOn)
             .IsRequired()
-            .HasColumnName("created_on")
-            .HasColumnType("TIMESPAN");
+            .HasColumnName("CreatedOn")
+            .HasColumnType("DATETIME");
 
         builder.Property(p => p.CreatedBy)
             .IsRequired()
-            .HasColumnName("created_by")
+            .HasColumnName("CreatedBy")
             .HasMaxLength(255)
             .HasColumnType("VARCHAR(256)");
 
         builder.Property(p => p.ModifiedOn)
             .IsRequired(false)
-            .HasColumnName("modified_on")
-            .HasColumnType("TIMESPAN");
+            .HasColumnName("ModifiedOn")
+            .HasColumnType("DATETIME");
 
         builder.Property(p => p.ModifiedBy)
             .IsRequired(false)
-            .HasColumnName("modified_by")
+            .HasColumnName("ModifiedBy")
             .HasMaxLength(255)
             .HasColumnType("VARCHAR(256)");
 

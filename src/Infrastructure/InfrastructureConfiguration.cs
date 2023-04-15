@@ -17,6 +17,12 @@ public static class InfrastructureConfiguration
             )
         );
 
+        services.AddStackExchangeRedisCache(options =>
+        {
+           options.Configuration = configuration.GetConnectionString("ConCahce");
+           options.InstanceName = configuration.GetValue<string>("Environment:dentifier");
+        });
+
         services.AddScoped<SqlContext>();
 
         services.AddSingleton<ICache, CacheContext>();

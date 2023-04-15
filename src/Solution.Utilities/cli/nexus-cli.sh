@@ -147,15 +147,15 @@ applicationHandler() {
 
     infrastructureHandler
 
-    if [ $Dump = 'yes' ]; then
+    if [ $WithDump = 'yes' ]; then
 
         echo 'Add dump in Infrastructure Manager'
 
         pathDestination='../../Infrastructure.Manager/'$ModuleName
-        pathDestinationDump=$pathApplicationDestination'/Dumps/'
+        pathDestinationDump=$pathDestination'/Dumps/'
 
         if [ ! -f "$pathDestination" ]; then
-            mkdir -p $pathApplicationDestination
+            mkdir -p $pathDestination
             mkdir -p $pathDestinationDump
         fi
 

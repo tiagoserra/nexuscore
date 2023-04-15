@@ -8,12 +8,12 @@ namespace Application.Core.Commands;
 [AuthorizeAttribute(Role = SystemGlobalizationPermission.Role, Policy = SystemGlobalizationPermission.Policy.Write)]
 public class SystemGlobalizationAlterCommand : IRequest<ResponseCommand>
 {
-    public long Id { get; set; }
-    public Dictionary<string, string> Resource { get; set; }
+    public string Key { get; }
+    public Dictionary<string, string> Resource { get; }
 
-    public SystemGlobalizationAlterCommand(long id, Dictionary<string, string> resource)
+    public SystemGlobalizationAlterCommand(string key, Dictionary<string, string> resource)
     {
-        Id = id;
+        Key = key;
         Resource = resource;
     }
 }

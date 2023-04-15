@@ -21,7 +21,7 @@ public class SystemGlobalizationAlterCommandHandler : IRequestHandler<SystemGlob
 
     public async Task<ResponseCommand> Handle(SystemGlobalizationAlterCommand request, CancellationToken cancellationToken)
     {
-        SystemGlobalization systemglobalization = await _repository.GetByIdAsync(request.Id);
+        var systemglobalization = await _repository.GetByKeyAsync(request.Key);
 
         if(systemglobalization is null)
             return new ResponseCommand(ResponseStatusCommand.NotFound);

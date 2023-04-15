@@ -3,7 +3,6 @@ using Application.Common.Commands;
 using Application.Common.Enums;
 using Application.%#MODULE#%.Commands;
 using Application.%#MODULE#%.Interfaces;
-using Domain.%#MODULE#%.Entities;
 using MediatR;
 
 namespace Application.%#MODULE#%.CommandHandlers;
@@ -21,7 +20,7 @@ public class %##%RegisterCommandHandler : IRequestHandler<%##%RegisterCommand, R
 
     public async Task<ResponseCommand> Handle(%##%RegisterCommand request, CancellationToken cancellationToken)
     {
-        %##% %#lower#% = new(request.Name);
+        var %#lower#% = new(request.Name);
 
         await _repository.InsertAsync(%#lower#%);
 

@@ -21,7 +21,7 @@ public class SystemGlobalizationRegisterCommandHandler : IRequestHandler<SystemG
 
     public async Task<ResponseCommand> Handle(SystemGlobalizationRegisterCommand request, CancellationToken cancellationToken)
     {
-        SystemGlobalization systemglobalization = await _repository.GetByKeyAsync(request.Key.ToLower());
+        var systemglobalization = await _repository.GetByKeyAsync(request.Key.ToLower());
 
         if (systemglobalization is not null)
         {
@@ -31,7 +31,7 @@ public class SystemGlobalizationRegisterCommandHandler : IRequestHandler<SystemG
             return response;
         }
 
-        systemglobalization = new(request.Key, request.Resource);
+        systemglobalization = new SystemGlobalization(request.Key, request.Resource);
 
         await _repository.InsertAsync(systemglobalization);
 

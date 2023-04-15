@@ -1,3 +1,4 @@
+using System.Reflection;
 using Application;
 using Application.Common.Interfaces;
 using Infrastructure.Manager.Consts;
@@ -53,6 +54,10 @@ public class Startup
         _serviceCollection.AddScoped<IExecutionContext, Infrastructure.Manager.Common.ExecutionContext>();
         _serviceCollection.AddApplication();
         _serviceCollection.AddInfracstruture(_configuration);
+
+        _serviceCollection.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(Assembly.GetAssembly(typeof(ApplicationConfiguration))));
+        _serviceCollection.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly()));
+
         AddDumps(_serviceCollection);
         
         _serviceProvider = _serviceCollection.BuildServiceProvider();

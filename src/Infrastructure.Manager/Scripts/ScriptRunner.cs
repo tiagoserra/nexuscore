@@ -18,13 +18,15 @@ internal class ScriptRunner
         if (dropDatabase)
             DropDatabase.For.SqlDatabase(_configuration.GetConnectionString("ConnSql"));
 
-        RunScripts("Scripts/runAfter/");
+        EnsureDatabase.For.SqlDatabase(_configuration.GetConnectionString("ConnSql"));
+
+        //RunScripts("Scripts/runBefore/");
         RunScripts("Scripts/tables/");
         RunScripts("Scripts/indexes/");
         RunScripts("Scripts/functions/");
         RunScripts("Scripts/triggers/");
         RunScripts("Scripts/procedures/");
-        RunScripts("Scripts/runBefore/");
+        RunScripts("Scripts/runAfter/");
     }
 
     private void RunScripts(string scriptPath)
@@ -42,7 +44,7 @@ internal class ScriptRunner
                     IncludeSubDirectories = true
                 }
             )
-            .WithTransactionPerScript()
+            //.WithTransactionPerScript()
             .WithVariablesDisabled()
             .Build();
 

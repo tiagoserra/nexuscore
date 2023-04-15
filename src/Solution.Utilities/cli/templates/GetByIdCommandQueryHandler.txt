@@ -3,7 +3,6 @@ using Application.Common.Commands;
 using Application.Common.Enums;
 using Application.%#MODULE#%.CommandQueries;
 using Application.%#MODULE#%.Interfaces;
-using Domain.%#MODULE#%.Entities;
 using MediatR;
 
 namespace Application.%#MODULE#%.CommandHandlers;
@@ -21,11 +20,8 @@ public class %##%GetByIdCommandQueryHandler : IRequestHandler<%##%GetByIdCommand
 
     public async Task<ResponseCommand> Handle(%##%GetByIdCommandQuery request, CancellationToken cancellationToken)
     {
-        %##% %#lower#% = await _repository.GetByIdAsync(request.Id);
+        var %#lower#% = await _repository.GetByIdAsync(request.Id);
 
-        if(%#lower#% is null)
-            return new ResponseCommand(ResponseStatusCommand.NotFound);
-
-        return new ResponseCommand(%#lower#%);
+        return %#lower#% is null ? new ResponseCommand(ResponseStatusCommand.NotFound) : new ResponseCommand(%#lower#%);
     }
 }

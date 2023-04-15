@@ -3,7 +3,6 @@ using Application.Common.Commands;
 using Application.Common.Enums;
 using Application.%#MODULE#%.Commands;
 using Application.%#MODULE#%.Interfaces;
-using Domain.%#MODULE#%.Entities;
 using MediatR;
 
 namespace Application.%#MODULE#%.CommandHandlers;
@@ -21,7 +20,7 @@ public class %##%RemoveCommandHandler : IRequestHandler<%##%RemoveCommand, Respo
 
     public async Task<ResponseCommand> Handle(%##%RemoveCommand request, CancellationToken cancellationToken)
     {
-        %##% %#lower#% = await _repository.GetByIdAsync(request.Id);
+        var %#lower#% = await _repository.GetByIdAsync(request.Id);
 
         if(%#lower#% is null)
             return new ResponseCommand(ResponseStatusCommand.NotFound);

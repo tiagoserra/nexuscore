@@ -1,6 +1,7 @@
 using Application.Common.Interfaces;
 using Infrastructure.Data.Contexts;
 using Infrastructure.Data.Repositories;
+using Infrastructure.Globalization;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -23,8 +24,8 @@ public static class InfrastructureConfiguration
            options.InstanceName = configuration.GetValue<string>("Environment:dentifier");
         });
 
+        services.AddGlobalization();
         services.AddScoped<SqlContext>();
-
         services.AddSingleton<ICache, CacheContext>();
 
         services.Scan(scan => scan

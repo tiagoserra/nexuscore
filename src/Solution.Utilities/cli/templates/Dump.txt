@@ -1,7 +1,8 @@
+using Microsoft.Extensions.Localization;
+using Application.Common.Interfaces;
 using Application.%#MODULE#%.CommandQueries;
 using Application.%#MODULE#%.Commands;
 using Domain.%#MODULE#%.Entities;
-using Microsoft.Extensions.Localization;
 using MediatR;
 
 namespace Infrastructure.Manager.%#MODULE#%.Dumps;

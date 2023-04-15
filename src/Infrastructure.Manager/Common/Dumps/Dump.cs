@@ -19,7 +19,7 @@ public abstract class Dump<TEntity, TQuery, TCommand> : IDump
     protected readonly int _order;
     public int Order => _order;
 
-    public Dump(IExecutionContext executionContext, IStringLocalizer localizer, IMediator mediator, string dumpName, int order = 0)
+    protected Dump(IExecutionContext executionContext, IStringLocalizer localizer, IMediator mediator, string dumpName, int order = 0)
     {
         _executionContext = executionContext;
         Localizer = localizer;
@@ -30,14 +30,14 @@ public abstract class Dump<TEntity, TQuery, TCommand> : IDump
         Console.WriteLine("\t" + dumpName);
     }
 
-    public virtual async Task<bool> CanSaveAsync(TQuery query)
+    protected virtual async Task<bool> CanSaveAsync(TQuery query)
     {
         var result = await Mediator.Send(query);
 
         return result is null || result.Status == ResponseStatusCommand.NotFound;
     }
 
-    public virtual async Task SaveAsync(TQuery query, TCommand command)
+    protected virtual async Task SaveAsync(TQuery query, TCommand command)
     {
         if (await CanSaveAsync(query))
         {
@@ -52,7 +52,7 @@ public abstract class Dump<TEntity, TQuery, TCommand> : IDump
     public virtual Task DumpAsync()
         => Task.FromResult(true);
 
-    public virtual void PrintError(string errorMessage)
+    protected virtual void PrintError(string errorMessage)
     {
         Console.ForegroundColor = ConsoleColor.Red;
         Console.WriteLine(errorMessage);

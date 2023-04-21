@@ -1,5 +1,5 @@
-using Application.Common.Interfaces;
-using Application.Common.Types;
+using Domain.Common.Interfaces;
+using Domain.Common.Types;
 using Domain.Common.Entities;
 using Infrastructure.Data.Contexts;
 using Microsoft.EntityFrameworkCore;

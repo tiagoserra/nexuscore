@@ -1,4 +1,6 @@
 using Application.Common.Interfaces;
+using Domain.Common.Interfaces;
+using Domain.Core.Interfaces;
 using Infrastructure.Data.Contexts;
 using Infrastructure.Data.Repositories;
 using Infrastructure.Globalization;
@@ -12,6 +14,8 @@ public static class InfrastructureConfiguration
 {
     public static IServiceCollection AddInfracstruture(this IServiceCollection services, IConfiguration configuration)
     {
+        MongoDbPersistence.Configure();
+
         services.AddDbContext<SqlContext>(
             options => options.UseSqlServer(
                 configuration.GetConnectionString("ConnSql"), b => b.MigrationsAssembly(typeof(SqlContext).Assembly.FullName)
@@ -26,7 +30,11 @@ public static class InfrastructureConfiguration
 
         services.AddGlobalization();
         services.AddScoped<SqlContext>();
+        services.AddScoped<NoSqlContext>();
         services.AddSingleton<ICache, CacheContext>();
+
+        //Audit
+        services.AddSingleton<IAuditRepository, AuditRepository>();
 
         services.Scan(scan => scan
             .FromAssemblyOf<SqlContext>()

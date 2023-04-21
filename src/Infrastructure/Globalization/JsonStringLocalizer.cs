@@ -1,7 +1,7 @@
 using System.Globalization;
 using Application.Common.Interfaces;
 using Application.Core.Dtos;
-using Application.Core.Interfaces;
+using Domain.Core.Interfaces;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Localization;
 

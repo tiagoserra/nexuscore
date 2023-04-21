@@ -1,4 +1,4 @@
-namespace Application.Common.Types;
+namespace Domain.Common.Types;
 
 public record ResultPagination(int TotalPages, int PageIndex, int PageSize, long Count, dynamic Itens)
 {

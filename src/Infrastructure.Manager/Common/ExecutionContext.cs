@@ -10,6 +10,6 @@ public class ExecutionContext : IExecutionContext
     public bool HasRole(string role)
         => true;
 
-    public Guid ExecutionId
+    public Guid ExecutionContextId
         => new Guid(); 
 }

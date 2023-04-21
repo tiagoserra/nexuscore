@@ -1,4 +1,4 @@
-using Application.Common.Types;
+using Domain.Common.Types;
 
 namespace UnitTests.Application.Common.Types;
 

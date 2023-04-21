@@ -28,6 +28,21 @@ services:
         - "6379:6379"
     networks:
         - bridge-network
+  
+  mongodb:
+    image: mongo:latest
+    container_name: mongodb
+    restart: always
+    environment:
+        MONGO_INITDB_ROOT_USERNAME: nexuscore
+        MONGO_INITDB_ROOT_PASSWORD: UPjhg?eLKhAs9?:*jR%Ta?-zz
+    volumes:
+        - nexuscore-storage:/data/db
+        - ./src/Solution.Utilities/docker/mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js:ro
+    ports:
+        - "27017:27017"
+    networks:
+        - bridge-network
 
 networks:
   bridge-network:

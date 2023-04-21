@@ -1,4 +1,11 @@
-Sat Apr 15 15:55:00 UTC 2023
+Fri Apr 21 17:57:00 UTC 2023
+Improvement
+    Move interfece repository to Domain layer
+    Move type to Domain layer
+Feature
+    Add custom Audit on commands (attribute)
++--------------------------+
+Sat Apr 15 18:47:00 UTC 2023
 Fix
     Problem reference Ilogger on Infrastructure.Manager
     Reference Mediatr on Infrastructure.Manager 

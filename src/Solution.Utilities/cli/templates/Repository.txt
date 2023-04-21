@@ -1,5 +1,5 @@
 using Domain.%#MODULE#%.Entities;
-using Application.%#MODULE#%.Interfaces;
+using Domain.%#MODULE#%.Interfaces;
 using Infrastructure.Data.Contexts;
 
 namespace Infrastructure.Data.Repositories;

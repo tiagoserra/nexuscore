@@ -31,7 +31,7 @@ public class CachingBehavior<TRequest, TResponse> : IPipelineBehavior<TRequest, 
         var cacheKey = $"Cache:{request.GetType().Name}:{request.GetHashCode()}";
 
         if (cacheAttribute.CachePerUser)
-            cacheKey += $":User:{_executionContext.ExecutionId}";
+            cacheKey += $":User:{_executionContext.ExecutionContextId}";
 
         var cachedResult = await _cache.GetAsync<string>(cacheKey);
 

@@ -1,7 +1,7 @@
-using Application.Common.Interfaces;
+using Domain.Common.Interfaces;
 using Domain.Core.Entities;
 
-namespace Application.Core.Interfaces;
+namespace Domain.Core.Interfaces;
 
 public interface ISystemGlobalizationRepository : IRepository<SystemGlobalization>
 {

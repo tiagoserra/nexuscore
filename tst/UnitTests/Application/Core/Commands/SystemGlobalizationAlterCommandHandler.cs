@@ -1,7 +1,7 @@
 using Application.Common.Enums;
 using Application.Core.CommandHandlers;
 using Application.Core.Commands;
-using Application.Core.Interfaces;
+using Domain.Core.Interfaces;
 using Domain.Core.Entities;
 using Microsoft.Extensions.Localization;
 using Moq;

@@ -1,7 +1,7 @@
-using Application.Common.Types;
+using Domain.Common.Types;
 using Domain.Common.Entities;
 
-namespace Application.Common.Interfaces;
+namespace Domain.Common.Interfaces;
 
 public interface IRepository<TEntity> where TEntity : Entity
 {

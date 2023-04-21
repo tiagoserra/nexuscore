@@ -2,8 +2,7 @@ using Microsoft.Extensions.Localization;
 using Application.Common.Commands;
 using Application.Common.Enums;
 using Application.Core.Commands;
-using Application.Core.Interfaces;
-using Domain.Core.Entities;
+using Domain.Core.Interfaces;
 using MediatR;
 
 namespace Application.Core.CommandHandlers;

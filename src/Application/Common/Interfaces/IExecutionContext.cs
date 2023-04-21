@@ -6,5 +6,5 @@ public interface IExecutionContext
 
     bool HasPolicy(string policy);
 
-    Guid ExecutionId { get; }
+    Guid ExecutionContextId { get; }
 }

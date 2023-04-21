@@ -94,12 +94,15 @@ domainHandler() {
         mkdir -p $pathDomainDestination'/Enums/'
         mkdir -p $pathDomainDestination'/Events/'
         mkdir -p $pathDomainDestination'/Permissions/'
+        mkdir -p $pathDomainDestination'/Interfaces/'
     fi
 
     pathPermissions=$pathDomainDestination'/Permissions/'
+    pathADomainInterfaces=$pathDomainDestination'/Interfaces/'
 
     replaceInFile $pathDomainDestination'/Entities/'$EntityName'.cs' 'templates/Entity.txt'
     replaceInFile $pathPermissions'/'$EntityName'Permission.cs' 'templates/Permission.txt'
+    replaceInFile $pathADomainInterfaces'/I'$EntityName'Repository.cs' 'templates/IRepository.txt'
 
     applicationHandler
 
@@ -113,7 +116,6 @@ applicationHandler() {
     pathApplicationCommandValidations=$pathApplicationDestination'/CommandValidations/'
     pathApplicationCommandHandlers=$pathApplicationDestination'/CommandHandlers/'
     pathApplicationCommandQueries=$pathApplicationDestination'/CommandQueries/'
-    pathApplicationInterfaces=$pathApplicationDestination'/Interfaces/'
 
     if [ ! -f "$pathApplicationDestination" ]; then
         mkdir -p $pathApplicationDestination
@@ -122,7 +124,6 @@ applicationHandler() {
         mkdir -p $pathApplicationCommandQueries
         mkdir -p $pathApplicationCommandHandlers
         mkdir -p $pathApplicationDestination'/EventHandlers/'
-        mkdir -p $pathApplicationInterfaces
     fi
 
     replaceInFile $pathApplicationCommands'/'$EntityName'RegisterCommand.cs' 'templates/RegisterCommand.txt'
@@ -142,8 +143,6 @@ applicationHandler() {
 
     replaceInFile $pathApplicationCommandHandlers'/'$EntityName'GetByIdCommandQueryHandler.cs' 'templates/GetByIdCommandQueryHandler.txt'
     replaceInFile $pathApplicationCommandHandlers'/'$EntityName'GetAllWithPaginationCommandQueryHandler.cs' 'templates/GetAllWithPaginationCommandQueryHandler.txt'
-
-    replaceInFile $pathApplicationInterfaces'/I'$EntityName'Repository.cs' 'templates/IRepository.txt'
 
     infrastructureHandler
 
